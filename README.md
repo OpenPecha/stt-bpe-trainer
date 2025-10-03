@@ -1,6 +1,4 @@
-# README
-
-> **Note:** This readme template is based on one from the [Good Docs Project](https://thegooddocsproject.dev). You can find it and a guide to filling it out [here](https://gitlab.com/tgdp/templates/-/tree/main/readme). (_Erase this note after filling out the readme._)
+# Tibetan Whisper Tokenizer Trainer
 
 <h1 align="center">
   <br>
@@ -8,8 +6,8 @@
   <br>
 </h1>
 
-## _Project Name_
-_The project name should match its code's capability so that new users can easily understand what it does._
+## Tibetan Whisper Tokenizer Trainer
+Train and adapt Whisper tokenizers for Tibetan language speech recognition, enabling better tokenization of Tibetan text with specialized handling of syllables and tsek markers.
 
 ## Owner(s)
 
@@ -33,55 +31,71 @@ _Change to the owner(s) of the new repo. (This template's owners are:)_
 <hr>
 
 ## Project description
-_Use one of these:_
+With Tibetan Whisper Tokenizer Trainer, you can train OpenAI's Whisper tokenizer on Tibetan text corpora to enhance speech recognition for Tibetan language content.
 
-With _Project Name_ you can _verb_ _noun_...
-
-_Project Name_ helps you _verb_ _noun_...
+This toolkit helps you create specialized tokenizers that understand Tibetan syllable patterns and produce more efficient tokenization for Tibetan speech recognition tasks.
 
 
 ## Who this project is for
-This project is intended for _target user_ who wants to _user objective_.
+This project is intended for NLP researchers, linguists, and speech recognition developers who want to improve Whisper's tokenization performance on Tibetan language content.
 
 
 ## Project dependencies
-Before using _Project Name_, ensure you have:
-* _Prerequisite 1_
-* _Prerequisite 2_
-* _Prerequisite 3..._
+Before using Tibetan Whisper Tokenizer Trainer, ensure you have:
+* Python 3.8 or higher
+* transformers library (with Whisper support)
+* tokenizers library 
+* tqdm (for progress bars)
+* Internet connection (for downloading base Whisper models)
 
 
 ## Instructions for use
-Get started with _Project Name_ by _(write the first step a user needs to start using the project. Use a verb to start.)_.
+Get started with Tibetan Whisper Tokenizer Trainer by preparing your Tibetan text corpus and selecting a training mode.
+
+### Install Dependencies
+1. Install required Python packages:
+
+   ```bash
+   pip install transformers tokenizers tqdm
+   ```
+
+### Prepare Your Corpus
+1. Create a directory for your Tibetan text corpus:
+
+   ```bash
+   mkdir -p data/corpus
+   ```
+
+2. Add Tibetan text files (with .txt extension) to this directory. Each file should contain Tibetan text, with one sentence or utterance per line.
+
+### Train a Tibetan-Enhanced Tokenizer
+1. Use the main training script with your preferred options:
+
+   ```bash
+   python train_tibetan_whisper_tokenizer.py \
+      --model_name openai/whisper-small \
+      --corpus_dir data/corpus \
+      --output_dir data/tokenizer_whisper_tibetan \
+      --mode hybrid \
+      --vocab_size 55000
+   ```
+
+2. Available modes:
+   - `train`: Complete retraining of tokenizer (slowest but most comprehensive)
+   - `augment`: Only add new tokens to existing tokenizer (fastest)
+   - `hybrid`: Combined approach (recommended)
+
+### Test Your Tokenizer
+1. Test the trained tokenizer on Tibetan text samples:
+
+   ```bash
+   python test_tibetan_tokenizer.py \
+      --tokenizer_path data/tokenizer_whisper_tibetan \
+      --sample_text "བྱང་ཆུབ་ཀྱི་སེམས་རྣམ་པ་གཉིས་ཡོད་རེད།"
+   ```
 
 
-### Install _Project Name_
-1. _Write the step here._ 
-
-    _Explanatory text here_ 
-    
-    _(Optional: Include a code sample or screenshot that helps your users complete this step.)_
-
-2. _Write the step here._
- 
-    a. _Substep 1_ 
-    
-    b. _Substep 2_
-
-
-### Configure _Project Name_
-1. _Write the step here._
-2. _Write the step here._
-
-
-### Run _Project Name_
-1. _Write the step here._
-2. _Write the step here._
-
-
-### Troubleshoot _Project Name_
-1. _Write the step here._
-2. _Write the step here._
+### Troubleshooting
 
 <table>
   <tr>
@@ -94,35 +108,31 @@ Get started with _Project Name_ by _(write the first step a user needs to start 
   </tr>
   <tr>
    <td>
-    _Describe the issue here_
+    Cannot download Whisper model
    </td>
    <td>
-    _Write solution here_
-   </td>
-  </tr>
-  <tr>
-   <td>
-    _Describe the issue here_
-   </td>
-   <td>
-    _Write solution here_
+    Check your internet connection and try using a smaller model first (e.g., whisper-tiny).
    </td>
   </tr>
   <tr>
    <td>
-    _Describe the issue here_
+    Training is very slow
    </td>
    <td>
-    _Write solution here_
+    Use the 'augment' mode for faster results, or use a smaller corpus size.
+   </td>
+  </tr>
+  <tr>
+   <td>
+    Tokenizer is not handling tseks correctly
+   </td>
+   <td>
+    Try different tsek_behavior settings: 'with_previous', 'with_next', or 'separate'.
    </td>
   </tr>
 </table>
 
-
-Other troubleshooting supports:
-* _Link to FAQs_
-* _Link to runbooks_
-* _Link to other relevant support information_
+For Whisper model specific issues, refer to the Hugging Face documentation.
 
 
 ## Contributing guidelines
@@ -130,12 +140,11 @@ If you'd like to help out, check out our [contributing guidelines](/CONTRIBUTING
 
 
 ## Additional documentation
-_Include links and brief descriptions to additional documentation._
 
 For more information:
-* [Reference link 1](#)
-* [Reference link 2](#)
-* [Reference link 3](#)
+* [Whisper on Hugging Face](https://huggingface.co/docs/transformers/model_doc/whisper)
+* [Tokenizers library documentation](https://huggingface.co/docs/tokenizers/)
+* [BPE tokenization explanation](https://huggingface.co/docs/transformers/tokenizer_summary#bytepair-encoding-bpe)
 
 
 ## How to get help
@@ -145,4 +154,4 @@ For more information:
 
 
 ## Terms of use
-_Project Name_ is licensed under the [MIT License](/LICENSE.md).
+Tibetan Whisper Tokenizer Trainer is licensed under the [MIT License](/LICENSE.md).
